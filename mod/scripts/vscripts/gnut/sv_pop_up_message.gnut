@@ -1,0 +1,65 @@
+global function SendPopUpMessageToAllPlayers
+global function SendPopUpMessageToAllValidPlayers
+global function SendPopUpMessageToAllAlivePlayers
+
+global function SendPopUpMessageToPlayers
+global function SendPopUpMessageToValidPlayers
+global function SendPopUpMessageToAlivePlayers
+
+
+void function SendPopUpMessageToAllPlayers(string text)
+{  
+    foreach(player in GetPlayerArray())
+    {
+        NSSendPopUpMessageToPlayer( player, text )
+    }
+}
+
+void function SendPopUpMessageToAllValidPlayers(string text)
+{  
+    foreach(player in GetPlayerArray())
+    {
+        if(!IsValid(player))
+            continue
+        NSSendPopUpMessageToPlayer( player, text )
+    }
+}
+
+void function SendPopUpMessageToAllAlivePlayers(string text)
+{  
+    foreach(player in GetPlayerArray())
+    {
+        if(!IsAlive(player))
+            continue
+        NSSendPopUpMessageToPlayer( player, text )
+    }
+}
+
+
+void function SendPopUpMessageToPlayers(array<entity> playerArray, string text)
+{  
+    foreach(player in playerArray)
+    {
+        NSSendPopUpMessageToPlayer( player, text )
+    }
+}
+
+void function SendPopUpMessageToValidPlayers(array<entity> playerArray, string text)
+{  
+    foreach(player in playerArray)
+    {
+        if(!IsValid(player))
+            continue
+        NSSendPopUpMessageToPlayer( player, text )
+    }
+}
+
+void function SendPopUpMessageToAlivePlayers(array<entity> playerArray, string text)
+{  
+    foreach(player in playerArray)
+    {
+        if(!IsAlive(player))
+            continue
+        NSSendPopUpMessageToPlayer( player, text )
+    }
+}

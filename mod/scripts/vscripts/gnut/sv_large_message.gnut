@@ -1,0 +1,65 @@
+global function SendLargeMessageToAllPlayers
+global function SendLargeMessageToAllValidPlayers
+global function SendLargeMessageToAllAlivePlayers
+
+global function SendLargeMessageToPlayers
+global function SendLargeMessageToValidPlayers
+global function SendLargeMessageToAlivePlayers
+
+
+void function SendLargeMessageToAllPlayers(string title, string description, float duration, string image)
+{  
+    foreach(player in GetPlayerArray())
+    {
+        NSSendLargeMessageToPlayer( player, title, description, duration, image )
+    }
+}
+
+void function SendLargeMessageToAllValidPlayers(string title, string description, float duration, string image)
+{  
+    foreach(player in GetPlayerArray())
+    {
+        if(!IsValid(player))
+            continue
+        NSSendLargeMessageToPlayer( player, title, description, duration, image )
+    }
+}
+
+void function SendLargeMessageToAllAlivePlayers(string title, string description, float duration, string image)
+{  
+    foreach(player in GetPlayerArray())
+    {
+        if(!IsAlive(player))
+            continue
+        NSSendLargeMessageToPlayer( player, title, description, duration, image )
+    }
+}
+
+
+void function SendLargeMessageToPlayers(array<entity> playerArray, string title, string description, float duration, string image)
+{  
+    foreach(player in playerArray)
+    {
+        NSSendLargeMessageToPlayer( player, title, description, duration, image )
+    }
+}
+
+void function SendLargeMessageToValidPlayers(array<entity> playerArray, string title, string description, float duration, string image)
+{  
+    foreach(player in playerArray)
+    {
+        if(!IsValid(player))
+            continue
+        NSSendLargeMessageToPlayer( player, title, description, duration, image )
+    }
+}
+
+void function SendLargeMessageToAlivePlayers(array<entity> playerArray, string title, string description, float duration, string image)
+{  
+    foreach(player in playerArray)
+    {
+        if(!IsAlive(player))
+            continue
+        NSSendLargeMessageToPlayer( player, title, description, duration, image )
+    }
+}

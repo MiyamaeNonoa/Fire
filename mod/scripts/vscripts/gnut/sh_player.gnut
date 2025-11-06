@@ -1,0 +1,131 @@
+untyped
+#if SERVER
+global function GetPlayerUID
+global function GetPlayerUIDByName
+global function GetPlayerByUID
+global function IsValidUID
+#endif
+#if CLIENT
+global function GetPlayerPing
+#endif
+global function GetPlayerByName
+global function IsValidPlayerName
+global function GetBotArray
+global function GetPlayerByNamePrefix
+global function GetPlayersByNamePrefix
+
+
+#if SERVER
+string function GetPlayerUID(entity player)
+{
+    return player.GetUID()
+}
+
+string function GetPlayerUIDByName(string playerName)
+{
+    return GetPlayerByName(playerName).GetUID()
+}
+
+entity function GetPlayerByUID(string userId)
+{
+    foreach(player in GetPlayerArray())
+    {
+        if( player.GetUID() == userId )
+        {
+            return player
+        }
+    }
+    return null
+}
+
+bool function IsValidUID(string userId)
+{
+    foreach(player in GetPlayerArray())
+    {
+        if( player.GetUID() == userId )
+        {
+            return true
+        }
+    }
+    return false
+}
+#endif
+#if CLIENT
+int function GetPlayerPing(entity player)
+{
+    if(player == GetLocalClientPlayer())
+    {
+        return MyPing()
+    }else{
+        return player.GetPlayerGameStat(PGS_PING)
+    }
+    return -1
+}
+
+int function GetPing(entity player)
+{
+    return GetPlayerPing(player)
+}
+#endif
+
+entity function GetPlayerByName(string playerName)
+{
+    foreach(player in GetPlayerArray())
+    {
+        if( player.GetPlayerName() == playerName )
+        {
+            return player
+        }
+    }
+    return null
+}
+
+bool function IsValidPlayerName(string playerName)
+{
+    foreach(player in GetPlayerArray())
+    {
+        if( player.GetPlayerName() == playerName )
+        {
+            return true
+        }
+    }
+    return false
+}
+
+array<entity> function GetBotArray()
+{
+    array<entity> bots = []
+    foreach(player in GetPlayerArray())
+    {
+        if( !IsValid(player) )
+            continue
+        if( player.IsBot() )
+            bots.append(player)
+    }
+    return bots
+}
+
+entity function GetPlayerByNamePrefix(string prefix)
+{
+    foreach(player in GetPlayerArray())
+    {     
+        if( StartsWith( player.GetPlayerName().tolower(), prefix.tolower() ) )
+        {
+            return player
+        }
+    }
+    return null
+}
+
+array<entity> function GetPlayersByNamePrefix(string prefix)
+{
+    array<entity> players = []
+    foreach(player in GetPlayerArray())
+    {     
+        if( StartsWith( player.GetPlayerName().tolower(), prefix.tolower() ) )
+        {
+            players.append(player)
+        }
+    }
+    return players
+}

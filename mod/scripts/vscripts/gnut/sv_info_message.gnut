@@ -1,0 +1,65 @@
+global function SendInfoMessageToAllPlayers
+global function SendInfoMessageToAllValidPlayers
+global function SendInfoMessageToAllAlivePlayers
+
+global function SendInfoMessageToPlayers
+global function SendInfoMessageToValidPlayers
+global function SendInfoMessageToAlivePlayers
+
+
+void function SendInfoMessageToAllPlayers(string text)
+{  
+    foreach(player in GetPlayerArray())
+    {
+        NSSendInfoMessageToPlayer( player, text )
+    }
+}
+
+void function SendInfoMessageToAllValidPlayers(string text)
+{  
+    foreach(player in GetPlayerArray())
+    {
+        if(!IsValid(player))
+            continue
+        NSSendInfoMessageToPlayer( player, text )
+    }
+}
+
+void function SendInfoMessageToAllAlivePlayers(string text)
+{  
+    foreach(player in GetPlayerArray())
+    {
+        if(!IsAlive(player))
+            continue
+        NSSendInfoMessageToPlayer( player, text )
+    }
+}
+
+
+void function SendInfoMessageToPlayers(array<entity> playerArray, string text)
+{  
+    foreach(player in playerArray)
+    {
+        NSSendInfoMessageToPlayer( player, text )
+    }
+}
+
+void function SendInfoMessageToValidPlayers(array<entity> playerArray, string text)
+{  
+    foreach(player in playerArray)
+    {
+        if(!IsValid(player))
+            continue
+        NSSendInfoMessageToPlayer( player, text )
+    }
+}
+
+void function SendInfoMessageToAlivePlayers(array<entity> playerArray, string text)
+{  
+    foreach(player in playerArray)
+    {
+        if(!IsAlive(player))
+            continue
+        NSSendInfoMessageToPlayer( player, text )
+    }
+}

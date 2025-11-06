@@ -1,0 +1,75 @@
+global function SendAnnouncementMessageToAllPlayers
+global function SendAnnouncementMessageToAllValidPlayers
+global function SendAnnouncementMessageToAllAlivePlayers
+
+global function SendAnnouncementMessageToPlayers
+global function SendAnnouncementMessageToValidPlayers
+global function SendAnnouncementMessageToAlivePlayers
+
+global const int ANNOUNCEMENT_STYLE_BIG = 0
+global const int ANNOUNCEMENT_STYLE_QUICK = 1
+global const int ANNOUNCEMENT_STYLE_PLAYER_LEVEL = 2
+global const int ANNOUNCEMENT_STYLE_WEAPON_LEVEL = 3
+global const int ANNOUNCEMENT_STYLE_TITAN_LEVEL = 4
+global const int ANNOUNCEMENT_STYLE_SWEEP = 5
+global const int ANNOUNCEMENT_STYLE_RESULTS = 6
+global const int ANNOUNCEMENT_STYLE_FD_WAVE_INTRO = 7
+global const int ANNOUNCEMENT_STYLE_FD_ITEM = 8
+
+
+void function SendAnnouncementMessageToAllPlayers(string title, string description, vector color, int priority, int style)
+{  
+    foreach(player in GetPlayerArray())
+    {
+        NSSendAnnouncementMessageToPlayer( player, title, description, color, priority, style )
+    }
+}
+
+void function SendAnnouncementMessageToAllValidPlayers(string title, string description, vector color, int priority, int style)
+{  
+    foreach(player in GetPlayerArray())
+    {
+        if(!IsValid(player))
+            continue
+        NSSendAnnouncementMessageToPlayer( player, title, description, color, priority, style )
+    }
+}
+
+void function SendAnnouncementMessageToAllAlivePlayers(string title, string description, vector color, int priority, int style)
+{  
+    foreach(player in GetPlayerArray())
+    {
+        if(!IsAlive(player))
+            continue
+        NSSendAnnouncementMessageToPlayer( player, title, description, color, priority, style )
+    }
+}
+
+
+void function SendAnnouncementMessageToPlayers(array<entity> playerArray, string title, string description, vector color, int priority, int style)
+{  
+    foreach(player in playerArray)
+    {
+        NSSendAnnouncementMessageToPlayer( player, title, description, color, priority, style )
+    }
+}
+
+void function SendAnnouncementMessageToValidPlayers(array<entity> playerArray, string title, string description, vector color, int priority, int style)
+{  
+    foreach(player in playerArray)
+    {
+        if(!IsValid(player))
+            continue
+        NSSendAnnouncementMessageToPlayer( player, title, description, color, priority, style )
+    }
+}
+
+void function SendAnnouncementMessageToAlivePlayers(array<entity> playerArray, string title, string description, vector color, int priority, int style)
+{  
+    foreach(player in playerArray)
+    {
+        if(!IsAlive(player))
+            continue
+        NSSendAnnouncementMessageToPlayer( player, title, description, color, priority, style )
+    }
+}

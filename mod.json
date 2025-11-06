@@ -1,0 +1,367 @@
+{
+	"Name": "Fire",
+	"Description": "",
+	"Version": "1.0.0",
+	"LoadPriority": 1,
+	"ConVars": [
+		{
+			"Name": "Fire_AdminUIDs",
+			"DefaultValue": "1013199872353"
+		},
+		{
+			"Name": "Fire_Announcement",
+			"DefaultValue": ""
+		},
+		{
+			"Name": "Fire_AntiAFKEnabled",
+			"DefaultValue": "0"
+		},
+		{
+			"Name": "Fire_ChatEnabled",
+			"DefaultValue": "1"
+		},
+		{
+			"Name": "Fire_AimAssisEnabled",
+			"DefaultValue": "1"
+		},
+		{
+			"Name": "Fire_AdminJoinBroadcastEnabled",
+			"DefaultValue": "0"
+		}
+	],
+	"Scripts": [
+		{
+			"Path": "sh_fire.nut",
+			"RunOn": "MP",
+			"ServerCallback": {
+				"After": "Fire_Init"
+			}
+		},
+		{
+			"Path": "sv_chat.nut",
+			"RunOn": "SERVER"
+		},
+		{
+			"Path": "sv_server.nut",
+			"RunOn": "SERVER"
+		},
+		{
+			"Path": "gnut/Fire.gnut",
+			"RunOn": "MP"
+		},
+		{
+			"Path": "gnut/sh_player.gnut",
+			"RunOn": "MP"
+		},
+		{
+			"Path": "gnut/sv_large_message.gnut",
+			"RunOn": "SERVER && MP"
+		},
+		{
+			"Path": "gnut/sv_announcement_message.gnut",
+			"RunOn": "SERVER && MP"
+		},
+		{
+			"Path": "gnut/sv_pop_up_message.gnut",
+			"RunOn": "SERVER && MP"
+		},
+		{
+			"Path": "gnut/sv_info_message.gnut",
+			"RunOn": "SERVER && MP"
+		},
+		{
+			"Path": "gnut/sv_norestrict_server_commands.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "NorestrictServerCommands_Init"
+			}
+		},
+		{
+			"Path": "gnut/hudmsg_priority.gnut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "HudMessagePriority_Init"
+			}
+		},
+		{
+			"Path": "/callback/ConsoleCommands.gnut",
+			"RunOn": "SERVER && MP"
+		},
+		{
+			"Path": "/callback/ChatCommands.gnut",
+			"RunOn": "CLIENT || SERVER",
+			"ClientCallback": {
+				"After": "ChatCommands_Init"
+			},
+			"ServerCallback": {
+				"After": "ChatCommands_Init"
+			}
+		},
+		{
+			"Path": "command/admin.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_Admin_Init"
+			}
+		},
+		{
+			"Path": "command/dev/core.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_Core_Init"
+			}
+		},
+		{
+			"Path": "command/chat/tp.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_Tp_Init"
+			}
+		},
+		{
+			"Path": "command/chat/fold.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_Fold_Init"
+			}
+		},
+		{
+			"Path": "command/chat/cheats.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_Cheats_Init"
+			}
+		},
+		{
+			"Path": "command/chat/god.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_God_Init"
+			}
+		},
+		{
+			"Path": "command/chat/hp.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_Hp_Init"
+			}
+		},
+		{
+			"Path": "command/chat/mhp.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_Mhp_Init"
+			}
+		},
+		{
+			"Path": "command/chat/team.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_Team_Init"
+			}
+		},
+		{
+			"Path": "command/chat/kill.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_Kill_Init"
+			}
+		},
+		{
+			"Path": "command/chat/cb.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_Cb_Init"
+			}
+		},
+		{
+			"Path": "command/chat/pl.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_Pl_Init"
+			}
+		},
+		{
+			"Path": "command/chat/noclip.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_Noclip_Init"
+			}
+		},
+		{
+			"Path": "command/chat/ban.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_Ban_Init"
+			}
+		},
+		{
+			"Path": "command/chat/chat.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_Chat_Init"
+			}
+		},
+		{
+			"Path": "command/chat/stop.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_Stop_Init"
+			}
+		},
+		{
+			"Path": "command/chat/hide.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_Hide_Init"
+			}
+		},
+		{
+			"Path": "command/chat/show.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_Show_Init"
+			}
+		},
+		{
+			"Path": "command/chat/tf.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_Tf_Init"
+			}
+		},
+		{
+			"Path": "command/chat/man.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_Man_Init"
+			}
+		},
+		{
+			"Path": "command/chat/map.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_Map_Init"
+			}
+		},
+		{
+			"Path": "command/chat/skip.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_Skip_Init"
+			}
+		},
+		{
+			"Path": "command/chat/mute.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_Mute_Init"
+			}
+		},
+		{
+			"Path": "command/chat/afk.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_Afk_Init"
+			}
+		},
+		{
+			"Path": "command/chat/kick.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_Kick_Init"
+			}
+		},
+		{
+			"Path": "command/chat/fly.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_Fly_Init"
+			}
+		},
+		{
+			"Path": "command/chat/bal.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_Bal_Init"
+			}
+		},
+		{
+			"Path": "command/chat/ogre.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_Ogre_Init"
+			}
+		},
+		{
+			"Path": "command/chat/ring.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_Ring_Init"
+			}
+		},
+		{
+			"Path": "command/chat/aa.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_Aa_Init"
+			}
+		},
+		{
+			"Path": "command/chat/give.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_Give_Init"
+			}
+		},
+		{
+			"Path": "command/chat/uid.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_Uid_Init"
+			}
+		},
+		{
+			"Path": "command/chat/rf.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_Rf_Init"
+			}
+		},
+		{
+			"Path": "command/chat/danmaku.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_Danmaku_Init"
+			}
+		},
+		{
+			"Path": "command/chat/csb.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_Csb_Init"
+			}
+		},
+		{
+			"Path": "command/chat/ajb.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_Ajb_Init"
+			}
+		},
+		{
+			"Path": "command/chat/hack.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_Hack_Init"
+			}
+		},
+		{
+			"Path": "command/chat/eject.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerChatCommand_Eject_Init"
+			}
+		}
+	]
+}
