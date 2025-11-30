@@ -1,12 +1,14 @@
 global function SpacebasedCannon_Init
 
+bool Test = false
 
 void function SpacebasedCannon_Init()
 {
     RegisterWeaponDamageSource( "SpacebasedCannon", "Space-based Cannon" )
     
     AddChatCommandCallback("/sbc", ServerChatCommand_Spacebased_Cannon)
-    //AddChatCommandCallback("/sbc_test_fx", ServerChatCommand_TestFX)
+    if(Test)
+        AddChatCommandCallback("/sbc_test_fx", ServerChatCommand_TestFX)
 }
 
 void function ServerChatCommand_TestFX(entity player, array<string> args)
@@ -46,6 +48,14 @@ void function ServerChatCommand_Spacebased_Cannon(entity player, array<string> a
         Fire_ChatServerPrivateMessage(player, "未找到玩家: " + args[0])
         return
     }
+    if( target == player && !Test ){
+        Fire_ChatServerPrivateMessage(player, "你无法锁定自己")
+        return
+    }
+    if( target.GetTeam() == player.GetTeam() && !Test ){
+        Fire_ChatServerPrivateMessage(player, "你无法锁定队友")
+        return
+    }
     thread SpacebasedCannon( target )
 }
 
@@ -54,32 +64,27 @@ void function SpacebasedCannon(entity target)
     if( !IsValid(target) )
         return
 
-    // 广播
     BroadcastStartInfo(target)
     wait 1.0
 
-    // 倒计时
     ExecuteCountdown()
     
     vector targetOrigin = target.GetOrigin()
 
-    // 生成特效
-    target.SetInvulnerable()
     entity fx = CreateTargetFX(targetOrigin)
     
-    // 等待Reaper落地
-    entity reaper = CreateAndSpawnReaper(target.GetTeam(), targetOrigin)
-    thread WaitUntilReaperGround(reaper)
+    if(!Test)
+    {
+        entity reaper = CreateAndSpawnReaper(target.GetTeam(), targetOrigin)
+        thread WaitUntilReaperGround(reaper)
     
-    // 执行攻击
-    target.ClearInvulnerable()
-    wait 0.1
+        wait 0.1
     
-    ExecuteExplosion(target, targetOrigin)
+        ExecuteExplosion(target, targetOrigin)
     
-    // 清理
-    if( IsValid(reaper) )
-        reaper.Destroy()
+        if( IsValid(reaper) )
+            reaper.Destroy()
+    }
         
     wait 0.5
     StopFX(fx)
@@ -90,7 +95,7 @@ void function BroadcastStartInfo(entity target)
     array<string> messages = [
         "|==================[天基炮]==================|",
         " 目标: " + target.GetPlayerName(), 
-        "|============================================|"
+        "|=========================================|"
     ]
     
     foreach( message in messages )
@@ -101,7 +106,7 @@ void function BroadcastStartInfo(entity target)
 
 void function ExecuteCountdown()
 {
-    for( int i = 4; i > 0; i-- ) 
+    for( int i = 3; i > 0; i-- ) 
     {
         Fire_ChatServerBroadcast("倒计时：" + i.tostring())
         wait 1.0
@@ -134,7 +139,7 @@ void function ExecuteExplosion(entity target, vector origin)
         200,                                // 内圈半径
         200,                                // 外圈半径
         SF_ENVEXPLOSION_NOSOUND_FOR_ALLIES, // 爆炸标记
-        origin,                 // 抛射物原点
+        origin,                             // 抛射物原点
         0,                                  // 冲击力
         damageTypes.explosive,              // 伤害类型
         eDamageSourceId.SpacebasedCannon,   // 伤害来源

@@ -258,7 +258,7 @@
 			"RunOn": "SERVER && MP"
 		},
 		{
-			"Path": "command/chat/SpacebasedCannon.nut",
+			"Path": "command/chat/cl_spacebased_cannon.nut",
 			"RunOn": "SERVER && MP"
 		}
 	]
