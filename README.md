@@ -110,3 +110,19 @@ bool function OnConsoleCommand(entity player, array<string> args)
 }
 ```
 
+## Fire v1.2.0 更新日志
+
+### 新功能
+
+- 添加版本检测功能，管理员会自动收到新版本通知
+- 新增 [/checkver](javascript:void(0)) 命令，允许管理员手动检查版本更新
+
+### 改进与重构
+
+- 所有聊天命令脚本文件重命名为 `sv_` 前缀。
+- 提取通用工具函数到 [sh_util.gnut](javascript:void(0))。
+- 重构HUD消息优先级队列系统。
+
+### 文档更新
+
+- 在 [README.md](javascript:void(0)) 中添加了 [/checkver](javascript:void(0)) 命令说明
