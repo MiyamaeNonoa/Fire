@@ -87,7 +87,7 @@ string function Fire_GetVersion()
 bool function Fire_IsDevVersion()
 {
     string ver = NSGetModVersionByModName("Fire")
-    return (ver.find("-dev") != -1)
+    return (ver.find("-dev") != null)
 }
 
 bool function Fire_HasNewVersion()
