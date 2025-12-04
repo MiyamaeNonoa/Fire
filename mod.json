@@ -53,6 +53,20 @@
 			"RunOn": "SERVER"
 		},
 		{
+			"Path": "sv_hud_message_queue.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "HudMessageQueue_Init"
+			}
+		},
+		{
+			"Path": "sv_server_command_auth.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "ServerCommandAuth_Init"
+			}
+		},
+		{
 			"Path": "gnut/Fire.gnut",
 			"RunOn": "MP"
 		},
@@ -75,20 +89,6 @@
 		{
 			"Path": "gnut/sv_info_message.gnut",
 			"RunOn": "SERVER && MP"
-		},
-		{
-			"Path": "gnut/sv_norestrict_server_commands.nut",
-			"RunOn": "SERVER && MP",
-			"ServerCallback": {
-				"After": "NorestrictServerCommands_Init"
-			}
-		},
-		{
-			"Path": "gnut/hudmsg_priority.gnut",
-			"RunOn": "SERVER && MP",
-			"ServerCallback": {
-				"After": "HudMessagePriority_Init"
-			}
 		},
 		{
 			"Path": "/callback/ConsoleCommands.gnut",
