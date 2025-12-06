@@ -2,8 +2,6 @@ global function ServerChatCommand_Eject_Init
 
 void function ServerChatCommand_Eject_Init()
 {
-    if( IsLobby() || IsMenuLevel() )
-        return
     AddChatCommandCallback( "/eject", ServerChatCommand_Eject )
 }
 
