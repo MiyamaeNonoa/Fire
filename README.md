@@ -66,6 +66,11 @@ Fire_AdminUIDs "1013199872353,1234567890123,9876543210987"
 - `/team <name/all/imc/militia> <team>`
 - `/checkver`
 - `/swit <name/all/imc/militia>`
+- `/money <name/all> <money>`
+- `/reserve <TeamReserve>`
+
+# 控制台命令
+- `fire`
 
 # 回调
 ### **聊天命令函数（ChatCommands.gnut）**
