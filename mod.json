@@ -267,6 +267,10 @@
 		{
 			"Path": "command/chat/sv_spacebased_cannon.nut",
 			"RunOn": "SERVER && MP"
+		},
+		{
+			"Path": "command/chat/sv_switch.nut",
+			"RunOn": "SERVER && MP"
 		}
 	]
 }

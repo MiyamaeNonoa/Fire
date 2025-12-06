@@ -17,6 +17,10 @@ void function FireCommand_Init()
     ServerChatCommand_Aa_Init()
     ServerChatCommand_Map_Init()
     ServerChatCommand_Csb_Init()
+    if( !IsFFAGame() )
+    {
+        ChatCommand_Switch_Init()
+    }
     if( !IsLobby() && !IsMenuLevel() )
     {
         SpacebasedCannon_Init()
