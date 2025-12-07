@@ -1,6 +1,5 @@
 global function ChatCommand_Hp_Init
 
-
 void function ChatCommand_Hp_Init()
 {
     AddChatCommandCallback( "/hp", ChatCommand_Hp )
@@ -8,19 +7,19 @@ void function ChatCommand_Hp_Init()
 
 void function ChatCommand_Hp(entity player, array<string> args)
 {
-    if(!Fire_IsPlayerAdmin(player)){
-        Fire_ChatServerPrivateMessage(player, "你没有管理员权限")
+    if( !Fire_IsPlayerAdmin(player) ){
+        Fire_ChatServerPrivateMessage( player, "你没有管理员权限" )
         return
     }
-    if(args.len() != 2){
-        Fire_ChatServerPrivateMessage(player, "用法: /hp < name/all/imc/militia > < 血量 >")
+    if( args.len() != 2 ){
+        Fire_ChatServerPrivateMessage( player, "用法: /hp < name/all/imc/militia > < 血量 >" )
         return
     }
 
-    string args0 = args[0]
+    string arg0 = args[0]
     array<entity> targets
 
-    switch( args0.tolower() ){
+    switch( arg0.tolower() ){
         case "all":
             targets = GetPlayerArray()
             break
@@ -31,30 +30,30 @@ void function ChatCommand_Hp(entity player, array<string> args)
             targets = GetPlayerArrayOfTeam( TEAM_MILITIA )
             break
         default:
-            targets = GetPlayersByNamePrefix( args0 )
+            targets = GetPlayersByNamePrefix( arg0 )
             break
     }
-    if(targets.len() == 0){
-        Fire_ChatServerPrivateMessage(player, "未找到玩家: " + args[1])
+    if( targets.len() == 0 ){
+        Fire_ChatServerPrivateMessage( player, "未找到玩家: " + arg0 )
         return
     }
 
-    string args1 = args[1]
+    string arg1 = args[1]
 
-    if(hasNonDigit(args1)){
-        Fire_ChatServerPrivateMessage(player, "血量必须是数字")
+    if( hasNonDigit(arg1) ){
+        Fire_ChatServerPrivateMessage( player, "血量必须是数字" )
         return
     }
-    int hp = args1.tointeger()
-    if(hp < 1){
-        Fire_ChatServerPrivateMessage(player, "血量必须大于等于1")
+    int hp = arg1.tointeger()
+    if( hp < 1 ){
+        Fire_ChatServerPrivateMessage( player, "血量必须大于等于1" )
         return
     }
 
     foreach(target in targets){
         string targetName = target.GetPlayerName()
-        if( !IsValid(target) || !IsAlive(target) ){
-            Fire_ChatServerPrivateMessage(player, "玩家 " + targetName + " 无效或死亡")
+        if( !IsAlive( target ) ){
+            Fire_ChatServerPrivateMessage( player, "玩家 " + targetName + " 已死亡" )
             continue
         }
         target.SetHealth(hp)
