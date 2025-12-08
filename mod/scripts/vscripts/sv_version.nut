@@ -1,7 +1,6 @@
 untyped
 global function FireVersion_Init
 global function Fire_GetVersion
-global function Fire_IsDevVersion
 global function Fire_HasNewVersion
 global function Fire_GetLatestVersion
 global function IsVersionNewer
@@ -34,19 +33,12 @@ void function ChatCommand_CheckVer(entity player, array<string> args)
         Fire_ChatServerPrivateMessage(player, "你没有管理员权限")
         return
     }
-    if(Fire_IsDevVersion()){
-        Fire_ChatServerPrivateMessage(player, "当前使用的是开发版本，不参与新版本自动检测。")
-        return
-    }
     Fire_ChatServerPrivateMessage(player, "正在检测新版本...")
     CheckForNewVersion(player)
 }
 
 void function CheckForNewVersion(entity manualChecker = null)
 {
-    if(Fire_IsDevVersion())
-        return
-
     table<string, array<string> > params
     NSHttpGet( "https://thunderstore.io/api/experimental/package/MiyamaeNonoa/Fire/", params, 
     void function( HttpRequestResponse response ) : (manualChecker)
@@ -83,12 +75,6 @@ void function CheckForNewVersion(entity manualChecker = null)
 string function Fire_GetVersion()
 {
     return FireModVersion
-}
-
-bool function Fire_IsDevVersion()
-{
-    string ver = NSGetModVersionByModName("Fire")
-    return (ver.find("-dev") != null)
 }
 
 bool function Fire_HasNewVersion()
