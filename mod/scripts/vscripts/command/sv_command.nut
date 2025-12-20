@@ -4,7 +4,6 @@ global function FireCommand_Init
 void function FireCommand_Init()
 {
     ConsoleCommand_Fire_Init()
-    ChatCommand_Admin_Init()
     ChatCommand_Cheats_Init()
     ChatCommand_Team_Init()
     ChatCommand_Pl_Init()
